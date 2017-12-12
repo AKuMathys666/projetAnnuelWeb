@@ -1,37 +1,15 @@
 package projetAnnuel;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.math.BigInteger;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.awt.event.*;
+import java.io.*;
+import java.net.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.swing.*;
 
-import org.bson.Document;
 import org.json.JSONObject;
-
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.Mongo;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoCredential;
-import com.mongodb.ServerAddress;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-
-import projetAnnuel.PanelWest.WorkspacesListener;
-
-
-
 
 public class PanelNorth  extends JPanel 
 {

@@ -3,25 +3,19 @@ package projetAnnuel;
 import com.mongodb.client.*;
 import com.mongodb.*;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.bson.*;
-import org.bson.conversions.*;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.math.BigInteger;
 //import java.net.HttpURLConnection;
 //import java.net.URL;
 import java.net.*;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ConnectToDB 
 { 
@@ -30,7 +24,8 @@ public class ConnectToDB
 	protected boolean auth;
 	protected String salt;
 	
-	 public static void main(String[] args) throws IOException, JSONException {
+public static void main(String[] args) throws IOException, JSONException 
+	{
 		 URL urll=new URL("http://localhost:8080/users");
 		 HttpURLConnection con =(HttpURLConnection) urll.openConnection();
 		 con.setRequestMethod("GET");
@@ -40,11 +35,29 @@ public class ConnectToDB
 		 BufferedReader rd = new BufferedReader(new InputStreamReader(is));
 		 StringBuilder response = new StringBuilder(); // or StringBuffer if Java version 5+
 		 String line;
-		 while ((line = rd.readLine()) != null) {
+		 while ((line = rd.readLine()) != null) 
+		 {
 			 response.append(line);
 			 response.append('\r');
 		 }
 		 rd.close();
+		 JSONArray jsonArray = new JSONArray(response.toString());
+		 ArrayList<String[]> listuser = new ArrayList<String[]>();
+		 for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject explrObject = jsonArray.getJSONObject(i);
+            String first_name=explrObject.getString("first_name");
+            String last_name=explrObject.getString("last_name");
+            String email=explrObject.getString("email");
+            System.out.println(first_name+" "+last_name+" "+email);
+            String[] user = {email,last_name,first_name};
+            listuser.add(user);
+		 }
+		 for(String[] item :listuser)
+		 {
+//			 System.out.println(item.toString()+"\n");
+		 }
+//		 System.out.println(listuser);
+//		 System.out.println(Arrays.toString(jsonArray));
 
 		 System.out.println(response);
 		 
@@ -65,17 +78,21 @@ public class ConnectToDB
 		 
 		 StringBuilder sb = new StringBuilder();  
 		 int HttpResult = co.getResponseCode(); 
-		 if (HttpResult == HttpURLConnection.HTTP_OK) {
-			 System.out.println("azer");  
+		 if (HttpResult == HttpURLConnection.HTTP_OK) 
+		 {
+//			 System.out.println("azer");  
 		     BufferedReader br = new BufferedReader(
 		             new InputStreamReader(co.getInputStream(), "utf-8"));
 		     line = null;  
-		     while ((line = br.readLine()) != null) {  
+		     while ((line = br.readLine()) != null) 
+		     {  
 		         sb.append(line + "\n");  
 		     }
 		     br.close();
 		     System.out.println("" + sb.toString());  
-		 } else {
+		 } 
+		 else 
+		 {
 		     System.out.println(co.getResponseMessage());  
 		 }
 	 }

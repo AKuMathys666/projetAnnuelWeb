@@ -1,27 +1,12 @@
 package projetAnnuel;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+import javax.swing.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import org.json.JSONException;
 
 public class PanelWest extends JPanel 
 {
@@ -151,7 +136,12 @@ public class PanelWest extends JPanel
     {
         public void actionPerformed(ActionEvent e) 
         {
-        	panelEast.displayProjects();
+        	try {
+				panelEast.displayProjects();
+			} catch (IOException | JSONException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
         }
     }
 

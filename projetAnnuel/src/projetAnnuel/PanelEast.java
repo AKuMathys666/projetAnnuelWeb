@@ -2,24 +2,17 @@ package projetAnnuel;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.math.BigInteger;
+import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.*;
-import java.text.*;
-import java.util.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
-import org.bson.Document;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.mongodb.BasicDBObject;
-import com.mongodb.client.MongoCollection;
 
 public class PanelEast extends JPanel 
 {
@@ -155,6 +148,7 @@ public class PanelEast extends JPanel
 			panelArray[i].setPreferredSize(new Dimension((88*width/100)-(3*height/100),81*height/100));
 			panelBackground.add(panelArray[i]);
 			panelArray[i].setVisible(false);
+			panelArray[i].setOpaque(false);
 		}
 	}
 	
@@ -179,7 +173,6 @@ public class PanelEast extends JPanel
 		for (int i=0;i<10;i++)
 		{
 			panelArray[i].setVisible(false);
-			panelArray[i].setOpaque(false);
 		}
 		panelArray[1].setVisible(true);
 		panelArray[1].removeAll();
@@ -265,7 +258,7 @@ public class PanelEast extends JPanel
 		panelArray[5].add(mytext);
     }
 	
-	public void displayProjects()
+	public void displayProjects() throws IOException, JSONException
     {
 		for (int i=0;i<10;i++)
 		{
@@ -281,6 +274,52 @@ public class PanelEast extends JPanel
 		mytext.setBackground(new Color(222,222,222));
 		mytext.setFont(new Font("Arial", Font.PLAIN, (int)fontSize/60));
 		panelArray[6].add(mytext);
+		
+//		JButton projects = new JButton("Create Projects");
+//		projects.addActionListener(new CreareProjectsListener());
+//		projects.setOpaque(false);
+//		projects.setContentAreaFilled(false);
+//		projects.setPreferredSize(new Dimension((12*width/100)-(4*height/100),7*height/100));
+//		projects.setFont(new Font("Arial", Font.PLAIN, (int)fontSize/60));
+//		projects.setFocusPainted(false);
+//		projects.setMargin(new Insets(1,1,1,1));
+//		panelArray[6].add(projects);
+//		URL urll=new URL("http://localhost:8080/projects");
+//		HttpURLConnection con =(HttpURLConnection) urll.openConnection();
+//		con.setRequestMethod("GET");
+//
+//		//Get Response
+//		InputStream is = con.getInputStream();
+//		BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+//		StringBuilder response = new StringBuilder(); // or StringBuffer if Java version 5+
+//		String line;
+//		while ((line = rd.readLine()) != null) 
+//		{
+//			response.append(line);
+//			response.append('\r');
+//		}
+//		rd.close();
+//		JSONArray jsonArray = new JSONArray(response.toString());
+//		
+//		JPanel panelProject = new JPanel();
+//		panelProject.setPreferredSize(new Dimension((50*width/100)-(2*height/100),5*jsonArray.length()*height/100));
+//		GridLayout grid = new GridLayout(jsonArray.length(),5,height/100,height/100);
+//		panelProject.setLayout(grid);
+//		
+//		for (int i = 0; i < jsonArray.length(); i++) 
+//		{
+//			JSONObject explrObject = jsonArray.getJSONObject(i);
+//			String team=explrObject.getString("team");
+//			String creator=explrObject.getString("creator");
+//			String title=explrObject.getString("title");
+//			String task=explrObject.getString("task");
+//			panelProject.add(new JTextArea(team));
+//			panelProject.add(new JTextArea(creator));
+//			panelProject.add(new JTextArea(title));
+//			panelProject.add(new JTextArea(task));
+//		}
+//		
+//		panelArray[6].add(panelProject);
     }
 	
 	public void displayClients()
@@ -335,6 +374,14 @@ public class PanelEast extends JPanel
 		mytext.setBackground(new Color(222,222,222));
 		mytext.setFont(new Font("Arial", Font.PLAIN, (int)fontSize/60));
 		panelArray[9].add(mytext);
+    }
+	
+	class CreareProjectsListener implements ActionListener 
+    {
+        public void actionPerformed(ActionEvent e) 
+        {
+        	
+        }
     }
 	
 	class SubmitCreationListener implements ActionListener 

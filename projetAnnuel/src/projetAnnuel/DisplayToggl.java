@@ -7,6 +7,8 @@ import javax.swing.*;
 
 public class DisplayToggl extends JFrame
 {
+
+	private static final long serialVersionUID = 1L;
 	//Declaration des panels principaux
 	private JPanel panelPrincipal;
 	private PanelNorth panelNorth;
