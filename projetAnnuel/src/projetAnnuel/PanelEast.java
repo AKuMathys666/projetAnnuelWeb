@@ -2,7 +2,12 @@ package projetAnnuel;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
@@ -11,6 +16,7 @@ import java.util.*;
 import javax.swing.*;
 
 import org.bson.Document;
+import org.json.JSONObject;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
@@ -33,10 +39,10 @@ public class PanelEast extends JPanel
   	private JTextArea lastName;
   	private JButton submit;
   	private JLabel erreurLogged;
-	
-	protected ImagePanel panelDate;
+  	
+  	public JPanel[] panelArray= new JPanel[10];
+	protected ImagePanel panelBackground;
 	protected PanelNorth panelNorth;
-	protected ConnectToDB myConnectionToDb;
 	
 	
 	public PanelEast(int wid,int hei, float fonts)
@@ -49,9 +55,13 @@ public class PanelEast extends JPanel
     public void createAccount()
     {
     	GridLayout grid = new GridLayout(5,2,height/100,height/100);
-    	panelDate.setBorder(BorderFactory.createEmptyBorder(5*height/100, 5*height/100, 30*height/100, 40*width/100));
-    	panelDate.setLayout(grid);
-    	
+    	panelArray[0].setVisible(true);
+    	panelArray[0].setBorder(BorderFactory.createEmptyBorder(5*height/100, 5*height/100, 30*height/100, 40*width/100));
+    	panelArray[0].setOpaque(false);
+    	((FlowLayout)panelArray[0].getLayout()).setVgap(height/100);
+		((FlowLayout)panelArray[0].getLayout()).setHgap(0);
+		panelArray[0].setLayout(grid);
+		
     	labelLogin = new JLabel("Email : ");
         labelLogin.setPreferredSize(new Dimension((10*width/100),5*height/100));
         labelLogin.setFont(new Font("Arial", Font.PLAIN, (int)fontSize/60));
@@ -112,34 +122,221 @@ public class PanelEast extends JPanel
         erreurLogged.setPreferredSize(new Dimension((10*width/100),5*height/100));
         erreurLogged.setFont(new Font("Arial", Font.PLAIN, (int)fontSize/60));
       	
-      	panelDate.add(labelLogin);
-      	panelDate.add(login);
-      	panelDate.add(labelPassword);
-      	panelDate.add(password);
-      	panelDate.add(labelFirstName);
-      	panelDate.add(firstName);
-      	panelDate.add(labelLastName);
-      	panelDate.add(lastName);
-      	panelDate.add(submit);
-      	panelDate.add(erreurLogged);
+        panelArray[0].add(labelLogin);
+        panelArray[0].add(login);
+        panelArray[0].add(labelPassword);
+        panelArray[0].add(password);
+        panelArray[0].add(labelFirstName);
+        panelArray[0].add(firstName);
+        panelArray[0].add(labelLastName);
+        panelArray[0].add(lastName);
+        panelArray[0].add(submit);
+        panelArray[0].add(erreurLogged);
     }
 	
-	public void init(PanelNorth aPanelNorth, ConnectToDB aConnectionToDb)
+	public void init(PanelNorth aPanelNorth)
     {
 		panelNorth=aPanelNorth;
-    	myConnectionToDb = aConnectionToDb;
 		
 		String monImage = "img/leftBackground.jpg";
-		panelDate = new ImagePanel(monImage,(88*width/100)-(2*height/100), 82*height/100);
+		panelBackground = new ImagePanel(monImage,(88*width/100)-(2*height/100), 82*height/100);
 		
-		panelDate.setPreferredSize(new Dimension((88*width/100)-(2*height/100),82*height/100));
+		panelBackground.setPreferredSize(new Dimension((88*width/100)-(2*height/100),82*height/100));
 		
 		//Ajout de ces derniers au panel nord
-		this.add(panelDate);
+		this.add(panelBackground);
 
 		((FlowLayout)this.getLayout()).setVgap(height/100);
 		((FlowLayout)this.getLayout()).setHgap(0);
+		
+		for (int i=0;i<10;i++)
+		{
+			panelArray[i]= new JPanel();
+			panelArray[i].setPreferredSize(new Dimension((88*width/100)-(3*height/100),81*height/100));
+			panelBackground.add(panelArray[i]);
+			panelArray[i].setVisible(false);
+		}
 	}
+	
+	public ImagePanel resetPanel()
+	{
+		String monImage = "img/leftBackground.jpg";
+		panelBackground = new ImagePanel(monImage,(88*width/100)-(2*height/100), 82*height/100);
+		
+		panelBackground.setPreferredSize(new Dimension((88*width/100)-(2*height/100),82*height/100));
+		
+		//Ajout de ces derniers au panel nord
+		this.add(panelBackground);
+
+		((FlowLayout)this.getLayout()).setVgap(height/100);
+		((FlowLayout)this.getLayout()).setHgap(0);
+		
+		return panelBackground;
+	}
+	
+	public void displayTimer()
+    {
+		for (int i=0;i<10;i++)
+		{
+			panelArray[i].setVisible(false);
+			panelArray[i].setOpaque(false);
+		}
+		panelArray[1].setVisible(true);
+		panelArray[1].removeAll();
+		JTextArea mytext = new JTextArea("displayTimer In progress");
+		mytext.setPreferredSize(new Dimension((25*width/100),5*height/100));
+		mytext.setMargin(new Insets(0,height/100,0,0));
+		mytext.setLineWrap(true);
+		mytext.setWrapStyleWord(true);
+		mytext.setBackground(new Color(222,222,222));
+		mytext.setFont(new Font("Arial", Font.PLAIN, (int)fontSize/60));
+		panelArray[1].add(mytext);
+    }
+	
+	public void displayDashboard()
+    {
+		for (int i=0;i<10;i++)
+		{
+			panelArray[i].setVisible(false);
+		}
+		panelArray[2].setVisible(true);
+		panelArray[2].removeAll();
+		JTextArea mytext = new JTextArea("displayDashboard In progress");
+		mytext.setPreferredSize(new Dimension((25*width/100),5*height/100));
+		mytext.setMargin(new Insets(0,height/100,0,0));
+		mytext.setLineWrap(true);
+		mytext.setWrapStyleWord(true);
+		mytext.setBackground(new Color(222,222,222));
+		mytext.setFont(new Font("Arial", Font.PLAIN, (int)fontSize/60));
+		panelArray[2].add(mytext);
+    }
+	
+	public void displayReports()
+    {
+		for (int i=0;i<10;i++)
+		{
+			panelArray[i].setVisible(false);
+		}
+		panelArray[3].setVisible(true);
+		panelArray[3].removeAll();
+		JTextArea mytext = new JTextArea("displayReports In progress");
+		mytext.setPreferredSize(new Dimension((25*width/100),5*height/100));
+		mytext.setMargin(new Insets(0,height/100,0,0));
+		mytext.setLineWrap(true);
+		mytext.setWrapStyleWord(true);
+		mytext.setBackground(new Color(222,222,222));
+		mytext.setFont(new Font("Arial", Font.PLAIN, (int)fontSize/60));
+		panelArray[3].add(mytext);
+    }
+	
+	public void displayInsights()
+    {
+		for (int i=0;i<10;i++)
+		{
+			panelArray[i].setVisible(false);
+		}
+		panelArray[4].setVisible(true);
+		panelArray[4].removeAll();
+		JTextArea mytext = new JTextArea("displayInsights In progress");
+		mytext.setPreferredSize(new Dimension((25*width/100),5*height/100));
+		mytext.setMargin(new Insets(0,height/100,0,0));
+		mytext.setLineWrap(true);
+		mytext.setWrapStyleWord(true);
+		mytext.setBackground(new Color(222,222,222));
+		mytext.setFont(new Font("Arial", Font.PLAIN, (int)fontSize/60));
+		panelArray[4].add(mytext);
+    }
+	
+	public void displaySavedReports()
+    {
+		for (int i=0;i<10;i++)
+		{
+			panelArray[i].setVisible(false);
+		}
+		panelArray[5].setVisible(true);
+		panelArray[5].removeAll();
+		JTextArea mytext = new JTextArea("displaySavedReports In progress");
+		mytext.setPreferredSize(new Dimension((25*width/100),5*height/100));
+		mytext.setMargin(new Insets(0,height/100,0,0));
+		mytext.setLineWrap(true);
+		mytext.setWrapStyleWord(true);
+		mytext.setBackground(new Color(222,222,222));
+		mytext.setFont(new Font("Arial", Font.PLAIN, (int)fontSize/60));
+		panelArray[5].add(mytext);
+    }
+	
+	public void displayProjects()
+    {
+		for (int i=0;i<10;i++)
+		{
+			panelArray[i].setVisible(false);
+		}
+		panelArray[6].setVisible(true);
+		panelArray[6].removeAll();
+		JTextArea mytext = new JTextArea("displayProjects In progress");
+		mytext.setPreferredSize(new Dimension((25*width/100),5*height/100));
+		mytext.setMargin(new Insets(0,height/100,0,0));
+		mytext.setLineWrap(true);
+		mytext.setWrapStyleWord(true);
+		mytext.setBackground(new Color(222,222,222));
+		mytext.setFont(new Font("Arial", Font.PLAIN, (int)fontSize/60));
+		panelArray[6].add(mytext);
+    }
+	
+	public void displayClients()
+    {
+		for (int i=0;i<10;i++)
+		{
+			panelArray[i].setVisible(false);
+		}
+		panelArray[7].setVisible(true);
+		panelArray[7].removeAll();
+		JTextArea mytext = new JTextArea("displayClients In progress");
+		mytext.setPreferredSize(new Dimension((25*width/100),5*height/100));
+		mytext.setMargin(new Insets(0,height/100,0,0));
+		mytext.setLineWrap(true);
+		mytext.setWrapStyleWord(true);
+		mytext.setBackground(new Color(222,222,222));
+		mytext.setFont(new Font("Arial", Font.PLAIN, (int)fontSize/60));
+		panelArray[7].add(mytext);
+    }
+	
+	public void displayTeam()
+    {
+		for (int i=0;i<10;i++)
+		{
+			panelArray[i].setVisible(false);
+		}
+		panelArray[8].setVisible(true);
+		panelArray[8].removeAll();
+		JTextArea mytext = new JTextArea("displayTeam In progress");
+		mytext.setPreferredSize(new Dimension((25*width/100),5*height/100));
+		mytext.setMargin(new Insets(0,height/100,0,0));
+		mytext.setLineWrap(true);
+		mytext.setWrapStyleWord(true);
+		mytext.setBackground(new Color(222,222,222));
+		mytext.setFont(new Font("Arial", Font.PLAIN, (int)fontSize/60));
+		panelArray[8].add(mytext);
+    }
+	
+	public void displayWorkspaces()
+    {
+		for (int i=0;i<10;i++)
+		{
+			panelArray[i].setVisible(false);
+		}
+		panelArray[9].setVisible(true);
+		panelArray[9].removeAll();
+		JTextArea mytext = new JTextArea("displayWorkspaces In progress");
+		mytext.setPreferredSize(new Dimension((25*width/100),5*height/100));
+		mytext.setMargin(new Insets(0,height/100,0,0));
+		mytext.setLineWrap(true);
+		mytext.setWrapStyleWord(true);
+		mytext.setBackground(new Color(222,222,222));
+		mytext.setFont(new Font("Arial", Font.PLAIN, (int)fontSize/60));
+		panelArray[9].add(mytext);
+    }
+	
 	class SubmitCreationListener implements ActionListener 
     {
         public void actionPerformed(ActionEvent e) 
@@ -149,48 +346,66 @@ public class PanelEast extends JPanel
         	String tryPassword=new String(tryPasswd);
         	String tryFirstName=firstName.getText();
         	String tryLastName=lastName.getText();
-        	int loginSize=tryLogin.length();
-        	int passwordSize=tryPassword.length();
-        	int firstNameSize=tryFirstName.length();
-        	int lastNameSize=tryLastName.length();
-        	if (loginSize==0)
+        	if (tryLogin.length()==0)
         	{
         		erreurLogged.setText(erreurLogged.getText()+"Login is empty. ");
         	}
-        	if (passwordSize==0)
+        	if (tryPassword.length()==0)
         	{
         		erreurLogged.setText(erreurLogged.getText()+"Password is empty. ");
         	}
-        	if (firstNameSize==0)
+        	if (tryFirstName.length()==0)
         	{
         		erreurLogged.setText(erreurLogged.getText()+"First name is empty. ");
         	}
-        	if (lastNameSize==0)
+        	if (tryLastName.length()==0)
         	{
         		erreurLogged.setText(erreurLogged.getText()+"Last name is empty. ");
         	}
         	System.out.println(erreurLogged.getText().length()+erreurLogged.getText());
         	if(erreurLogged.getText().length() == 0)
         	{
-        		MongoCollection<Document> user = myConnectionToDb.database.getCollection("users");
-        		MongoCollection<Document> tasks = myConnectionToDb.database.getCollection("tasks");
-        		MessageDigest messageDigest=null;
-        		try 
+        		try
         		{
-        		    messageDigest = MessageDigest.getInstance("SHA");
-        		    messageDigest.update((tryPassword+myConnectionToDb.salt).getBytes());
-        		} 
-        		catch (NoSuchAlgorithmException excep) 
-        		{
-        		    excep.printStackTrace();
+	        		URL url=new URL("http://localhost:8080/users");
+	       		 	HttpURLConnection co =(HttpURLConnection) url.openConnection();
+	       		 	co.setRequestProperty("Content-Type", "application/json");
+	       		 	co.setRequestProperty("Accept", "application/json");
+	       		 	co.setDoOutput(true);
+	       		 	co.setRequestMethod("POST");
+	       		 
+	       		 	JSONObject cred   = new JSONObject();
+	       		 	cred.put("email",tryLogin);
+	       		 	cred.put("password", tryPassword);
+	       		 	cred.put("first_name",tryFirstName);
+	       		 	cred.put("last_name", tryLastName);
+	       		 	OutputStreamWriter wr = new OutputStreamWriter(co.getOutputStream());
+	       		 	wr.write(cred.toString());
+	       		 	wr.flush();
+	       		 
+	       		 	StringBuilder sb = new StringBuilder();  
+	       		 	int HttpResult = co.getResponseCode(); 
+	       		 	if (HttpResult == HttpURLConnection.HTTP_OK) 
+	       		 	{
+	       		 		BufferedReader br = new BufferedReader(new InputStreamReader(co.getInputStream(), "utf-8"));
+	       		 		String line = null;  
+	       		 		while ((line = br.readLine()) != null) 
+	       		 		{  
+	       		 			sb.append(line + "\n");  
+	       		 		}
+	       		 		br.close();
+//	       		 		System.out.println("" + sb.toString());  
+	       		 		SwingUtilities.getWindowAncestor(submit).setVisible(false); //not working, WHY?
+	       		 	} 
+	       		 	else 
+	       		 	{
+	       		 		System.out.println(co.getResponseMessage());  
+	       		 	}
         		}
-        		String encryptedPassword = (new BigInteger(messageDigest.digest())).toString(16);
-        		Document document = new Document("email",tryLogin);
-        		document.append("password",encryptedPassword);
-        		document.append("first_name",tryFirstName);
-        		document.append("last_name",tryLastName);
-        		user.insertOne(document);
-        		erreurLogged.setText("");
+        		catch(Exception exc)
+        		{
+        			exc.printStackTrace();
+        		}
         	}
         }
     }

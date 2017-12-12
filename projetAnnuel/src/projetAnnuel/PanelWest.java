@@ -33,8 +33,7 @@ public class PanelWest extends JPanel
 	
 	private ArrayList<JButton> listButton = new ArrayList<JButton>();
 	
-	protected PanelNorth panelNorth;
-	protected ConnectToDB myConnectionToDb;
+	protected PanelEast panelEast;
 	
 	public PanelWest(int wid,int hei, float fonts)
 	{
@@ -43,11 +42,9 @@ public class PanelWest extends JPanel
 		fontSize=fonts;
 	}
 	
-	public void init(PanelNorth aPanelNorth, ConnectToDB aConnectionToDb)
+	public void init(PanelEast aPanelEast)
     {
-		panelNorth = aPanelNorth;
-    	myConnectionToDb = aConnectionToDb;
-		
+		panelEast = aPanelEast;
 		String monImage = "img/blue_background_extra_long.jpg";
 		ImagePanel panelDate = new ImagePanel(monImage,(12*width/100)-(2*height/100), 82*height/100);
 		
@@ -114,7 +111,7 @@ public class PanelWest extends JPanel
     {
         public void actionPerformed(ActionEvent e) 
         {
-        	
+        	panelEast.displayTimer();
         }
     }
 
@@ -122,7 +119,7 @@ public class PanelWest extends JPanel
     {
         public void actionPerformed(ActionEvent e) 
         {
-        	
+        	panelEast.displayDashboard();
         }
     }
 
@@ -130,7 +127,7 @@ public class PanelWest extends JPanel
     {
         public void actionPerformed(ActionEvent e) 
         {
-        	
+        	panelEast.displayReports();
         }
     }
 
@@ -138,7 +135,7 @@ public class PanelWest extends JPanel
     {
         public void actionPerformed(ActionEvent e) 
         {
-        	
+        	panelEast.displayInsights();
         }
     }
 
@@ -146,7 +143,7 @@ public class PanelWest extends JPanel
     {	
         public void actionPerformed(ActionEvent e) 
         {
-        	
+        	panelEast.displaySavedReports();
         }
     }
 
@@ -154,7 +151,7 @@ public class PanelWest extends JPanel
     {
         public void actionPerformed(ActionEvent e) 
         {
-        	
+        	panelEast.displayProjects();
         }
     }
 
@@ -162,7 +159,7 @@ public class PanelWest extends JPanel
     {
         public void actionPerformed(ActionEvent e) 
         {
-        	
+        	panelEast.displayClients();
         }
     }
 
@@ -170,7 +167,7 @@ public class PanelWest extends JPanel
     {
         public void actionPerformed(ActionEvent e) 
         {
-        	
+        	panelEast.displayTeam();
         }
     }
 
@@ -178,7 +175,7 @@ public class PanelWest extends JPanel
     {
         public void actionPerformed(ActionEvent e) 
         {
-        	
+        	panelEast.displayWorkspaces();
         }
     }
 }

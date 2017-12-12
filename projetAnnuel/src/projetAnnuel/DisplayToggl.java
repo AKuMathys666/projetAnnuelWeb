@@ -21,19 +21,10 @@ public class DisplayToggl extends JFrame
 	private float ratio;
 	private float fontSize;
 	
-	private String IP;
-	private String login;
-	private String passwd;
-	
-	protected ConnectToDB myConnectionToDb;
+	protected String token;
 	
 	public DisplayToggl(String siteWebIP,String monLogin, String monPasswd)					//Constructeur d'afficheur de l'ecran
 	{
-		myConnectionToDb = new ConnectToDB("al-janv-db","localhost",27017);
-		
-		IP=siteWebIP;
-		login=monLogin;
-		passwd=monPasswd;
 		
 		ratio = this.monRatio(width,height);
 		fontSize=(float)width*ratio;
@@ -88,13 +79,13 @@ public class DisplayToggl extends JFrame
 		
 		//Initialisation du contenue du panel nord
 		//initPanelNord();
-		panelNorth.init(panelEast, myConnectionToDb);
+		panelNorth.init(panelEast);
 		//Initialisation du contenue du panel Est
 		//initPanelEast();
-		panelEast.init(panelNorth, myConnectionToDb);
+		panelEast.init(panelNorth);
 		//Initialisation du contenue du panel West
 		//initPanelWest();
-		panelWest.init(panelNorth, myConnectionToDb);
+		panelWest.init(panelEast);
 	}
 		
 	private float monRatio(int width,int height){

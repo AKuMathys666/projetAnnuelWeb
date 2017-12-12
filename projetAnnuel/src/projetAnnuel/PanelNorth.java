@@ -3,7 +3,12 @@ package projetAnnuel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
@@ -12,6 +17,7 @@ import java.util.Calendar;
 import javax.swing.*;
 
 import org.bson.Document;
+import org.json.JSONObject;
 
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -45,7 +51,7 @@ public class PanelNorth  extends JPanel
     private JButton createAccount = new JButton();
     
     protected PanelEast panelEast;
-    protected ConnectToDB myConnectionToDb;
+    String token;
     
     public PanelNorth(int wid,int hei, float fonts)
     {
@@ -54,12 +60,10 @@ public class PanelNorth  extends JPanel
 		fontSize=fonts;
 	}
 
-    public void init(PanelEast aPanelEast, ConnectToDB aConnectionToDb)
+    public void init(PanelEast aPanelEast)
     {
     	panelEast = aPanelEast;
-    	myConnectionToDb = aConnectionToDb;
     	
-    	myConnectionToDb.auth=false;
 		//Definition de 2 panels contenant les informations generals du lycée et la date et heure
 		this.setBorder(BorderFactory.createEmptyBorder(height/100, height/100, 0, height/100));
 		
@@ -176,47 +180,57 @@ public class PanelNorth  extends JPanel
         	String tryLogin=login.getText();
         	char[] tryPasswd=password.getPassword();
         	String tryPassword = new String(tryPasswd);
-        	System.out.println("login "+ tryLogin + " password "+tryPassword);
+//        	System.out.println("login "+ tryLogin + " password "+tryPassword);
         	login.setText("");
         	password.setText("");
         	
-    		MongoCollection<Document> user = myConnectionToDb.database.getCollection("users");
-    		MessageDigest messageDigest=null;
-    		try 
-    		{
-    		    messageDigest = MessageDigest.getInstance("SHA");
-    		    messageDigest.update((tryPassword+myConnectionToDb.salt).getBytes());
-    		} 
-    		catch (NoSuchAlgorithmException excep) 
-    		{
-    		    excep.printStackTrace();
-    		}
-    		String encryptedPassword = (new BigInteger(messageDigest.digest())).toString(16);
-    		Document document = new Document("email",tryLogin);
-    		document.append("password",encryptedPassword);
-//    		user.insertOne(document);
-    		Document found = (Document) user.find(document).first();
-    		myConnectionToDb.auth = false;
-    		if (found != null)
-    		{
-    			myConnectionToDb.auth=true;
-    			System.out.println("user found"+found);
-    		}
-        	if(myConnectionToDb.auth)
+        	try
         	{
-        		logged.setText("Logged with username "+tryLogin);
-        		logged.setVisible(true);
-        		login.setVisible(false);
-        		labelLogin.setVisible(false);
-        		labelPassword.setVisible(false);
-        		password.setVisible(false);
-        		submit.setVisible(false);
-        		erreurLogged.setText("");
-        		erreurLogged.setVisible(false);
+	        	URL url=new URL("http://localhost:8080/auth/login");
+				HttpURLConnection co =(HttpURLConnection) url.openConnection();
+				co.setRequestProperty("Content-Type", "application/json");
+				co.setRequestProperty("Accept", "application/json");
+				co.setDoOutput(true);
+				co.setRequestMethod("POST");
+				 
+				JSONObject cred   = new JSONObject();
+				cred.put("email",tryLogin);
+				cred.put("password", tryPassword);
+				OutputStreamWriter wr = new OutputStreamWriter(co.getOutputStream());
+				wr.write(cred.toString());
+				wr.flush();
+				 
+				StringBuilder sb = new StringBuilder();  
+				int HttpResult = co.getResponseCode(); 
+				if (HttpResult == HttpURLConnection.HTTP_OK) 
+				{
+					BufferedReader br = new BufferedReader(new InputStreamReader(co.getInputStream(), "utf-8"));
+					String line = null;  
+	   		     	while ((line = br.readLine()) != null) 
+	   		     	{  
+	   		     		sb.append(line + "\n");  
+	   		     	}
+	   		     	br.close();
+	   		     	token = sb.toString();  
+	   		     	
+	   		     	logged.setText("Logged with username "+tryLogin);
+	        		logged.setVisible(true);
+	        		login.setVisible(false);
+	        		labelLogin.setVisible(false);
+	        		labelPassword.setVisible(false);
+	        		password.setVisible(false);
+	        		submit.setVisible(false);
+	        		erreurLogged.setText("");
+	        		erreurLogged.setVisible(false);
+	   		 	} 
+				else 
+				{
+					erreurLogged.setVisible(true);
+	   		 	}
         	}
-        	else
+        	catch(Exception exc)
         	{
-        		erreurLogged.setVisible(true);
+        		exc.printStackTrace();
         	}
         }
     }
