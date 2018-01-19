@@ -2,11 +2,12 @@
     include "header.php";
     require_once "functions.php";
 ?>
-    <section>
-
+<section>
 <?php
 
-    $data = array();                                                                    
+    $currentTime = date(DATE_ISO8601, time());
+
+    $data = array("endDate" => $currentTime);                                                                    
     $data_string = json_encode($data);
         
     //print($_SESSION['userToken']);
@@ -23,23 +24,19 @@
     //print($url);
 
     $ch = curl_init($url);                                                                      
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");                                                                     
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");                                                                     
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
     curl_setopt($ch, CURLOPT_HTTPHEADER, $header);                                                                                                                   
     $result = curl_exec($ch);
-        
-    //print($result);
-        
-    //$_SESSION['userToken'] = $result;
-        
-    echo "<h1 style='text-align:center'>Tâche supprimé!</br></h1>";
+
+    echo "Stopped!";
     
-    //print($_SESSION['userToken']);
+    $_SESSION['taskList'] = getListTasks($header, $data_string);
 
 ?>
-        
-    </section>
+    
+</section>
 
 <?php
     include "footer.php";

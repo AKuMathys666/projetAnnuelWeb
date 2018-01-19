@@ -20,15 +20,16 @@
 
     //print_r($result);
         //[project] => 5a242feb50f24621585a812f [owner] => 59fb196ccacbc51dc86cf4f1 [title] => task-4 [startDate] => 2017-01-04T00:00:00.000Z [__v] => 0 [endDate] => 2017-01-05T10:10:10.000Z
-        echo "<table class=".'"table-bordered table-responsive table-hover table-striped"'.">";
+        echo "<table class=".'"table-css table-bordered table-responsive table-hover table-striped"'.">";
         echo "<tr>
-        <th>Id</th>
-        <th>Title</th>
-        <th>Start date</th>
-        <th>End date</th>
-        <th>Owner</th>
-        <th>Project</th>
-        <th>__v</th>
+        <th class='title-css'>Id</th>
+        <th class='title-css'>Title</th>
+        <th class='title-css'>Start date</th>
+        <th class='title-css'>End date</th>
+        <th class='title-css'>Owner</th>
+        <th class='title-css'>Project</th>
+        <th class='title-css'>__v</th>
+        <th class='title-css'>Time</th>
         </tr>";
         
         displayTasks($_SESSION['taskList']);

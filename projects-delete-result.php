@@ -33,7 +33,8 @@
         
     //$_SESSION['userToken'] = $result;
         
-    echo "</br>";
+    echo "<h1 style='text-align:center'>Projet supprimé!</br></h1>";
+    
     
     //print($_SESSION['userToken']);
 

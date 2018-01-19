@@ -25,18 +25,18 @@
 
     $result = curl_exec($ch);
         
-    print($result);
+    //print($result);
         
     $_SESSION['userToken'] = $result;
     $_SESSION['projectList'] = getListProjects($header, $data_string);
     $_SESSION['taskList'] = getListTasks($header, $data_string);
     $_SESSION['userList'] = getListUsers($header, $data_string);
         
-    echo "</br>";
+    echo "</br>Logged in!";
         
     //print(getListProjects($header, $data_string));
     
-    print_r($_SESSION);
+    //print_r($_SESSION);
 
 ?>
         

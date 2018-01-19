@@ -21,14 +21,14 @@
     //print_r($result);
     /*    
     Array ( [_id] => 595f6feb46dbc60c80ddfbe5 [equipe] => 595f6feb46dbc60c80ddfbe6 [creator] => 595f6f9546dbc60c80ddfbe2 [title] => Projet 1 [__v] => 0 [tasks] => Array ( ) )*/
-        echo "<table class=".'"table-bordered table-responsive table-hover table-striped"'.">";
+        echo "<table class=".'"table-css table-bordered table-responsive table-hover table-striped"'.">";
         echo "<tr>
-        <th>Id</th>
-        <th>Title</th>
-        <th>Creator</th>
-        <th>Equipe</th>
-        <th>__v</th>
-        <th>tasks</th>
+        <th class='title-css'>Id</th>
+        <th class='title-css'>Title</th>
+        <th class='title-css'>Creator</th>
+        <th class='title-css'>Equipe</th>
+        <th class='title-css'>__v</th>
+        <th class='title-css'>tasks</th>
         </tr>";
         
         displayProjects($_SESSION['projectList']);

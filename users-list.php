@@ -19,15 +19,15 @@
     $_SESSION['userList'] = getListUsers($header, $data_string);
     
     //print_r($result);
-    echo "<table class=".'"table-bordered table-responsive table-hover table-striped"'.">";
+    echo "<table class=".'"table-css table-bordered table-responsive table-hover table-striped"'.">";
     echo "<tr>
-    <th>Id</th>
-    <th>Email</th>
-    <th>Role</th>
-    <th>Tasks</th>
-    <th>Last name</th>
-    <th>First name</th>
-    <th>__v</th>
+    <th class='title-css'>Id</th>
+    <th class='title-css'>Email</th>
+    <th class='title-css'>Role</th>
+    <th class='title-css'>Tasks</th>
+    <th class='title-css'>Last name</th>
+    <th class='title-css'>First name</th>
+    <th class='title-css'>__v</th>
     </tr>";
         
     displayUsers($_SESSION['userList']);

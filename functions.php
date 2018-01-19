@@ -99,6 +99,11 @@ function displayTasks($listTasks){
         echo "<td>".$listTasks[$i]['project']."</td>";
         echo "<td>".$listTasks[$i]['__v']."</td>";
         //echo "<td>".$listTasks[$i]['tasks']."</td>";
+        if(count($listTasks[$i])>6){
+            echo "<td>".displayTime(abs(strtotime($listTasks[$i]['startDate'])-strtotime($listTasks[$i]['endDate'])))."</td>";
+        }else{
+            echo "<td> NULL </td>";
+        }
 		echo "</tr>";
 	}
 }
@@ -200,5 +205,18 @@ function findProjectByTitle($projectList, $title){
     }
     return null;
 }
+
+function displayTime($time){
+    $rest= $time;
+    $days = round($rest/86400);
+    $rest = $rest%86400;
+    $hours = round($rest/3600);
+    $rest = $rest%3600;
+    $minutes = round($rest/60);
+    $rest = $rest%60;
+    $secondes = $rest;
+    return $days."days ".$hours."hours ".$minutes."minutes ".$secondes."secondes";
+}
+
 
 ?>

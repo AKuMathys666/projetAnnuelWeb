@@ -35,7 +35,8 @@
         
     //$_SESSION['userToken'] = $result;
         
-    echo "</br>";
+    echo "<h1 style='text-align:center'>Utilisateur supprimé!</br></h1>";
+    
     
     //print($_SESSION['userToken']);
 
