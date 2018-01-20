@@ -6,6 +6,7 @@
 <?php
 
     $currentTime = date(DATE_ISO8601, time());
+<<<<<<< HEAD
 /*********************/    
   
     echo "startDate: ";
@@ -35,6 +36,10 @@
     echo displayTime($times);
 
     $data = array("endDate" => $currentTime, "times" => $times);                                                                    
+=======
+
+    $data = array("endDate" => $currentTime);                                                                    
+>>>>>>> 61b689290dffe059394936b2b3c9f4a4d2b8cbd4
     $data_string = json_encode($data);
         
     //print($_SESSION['userToken']);
