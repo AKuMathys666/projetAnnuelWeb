@@ -29,11 +29,7 @@
         <th class='title-css'>Owner</th>
         <th class='title-css'>Project</th>
         <th class='title-css'>__v</th>
-<<<<<<< HEAD
         <th class='title-css'>Times</th>
-=======
-        <th class='title-css'>Time</th>
->>>>>>> 61b689290dffe059394936b2b3c9f4a4d2b8cbd4
         </tr>";
         
         displayTasks($_SESSION['taskList']);

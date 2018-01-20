@@ -99,7 +99,6 @@ function displayTasks($listTasks){
         echo "<td>".$listTasks[$i]['project']."</td>";
         echo "<td>".$listTasks[$i]['__v']."</td>";
         //echo "<td>".$listTasks[$i]['tasks']."</td>";
-<<<<<<< HEAD
         /*if(count($listTasks[$i])>6){
             echo "<td>".displayTime(abs(strtotime($listTasks[$i]['startDate'])-strtotime($listTasks[$i]['endDate'])))."</td>";
         }else{
@@ -109,12 +108,6 @@ function displayTasks($listTasks){
             echo "<td>".displayTime($listTasks[$i]['times'])."</td>";
         }else{
             echo "<td> 0 seconds </td>";
-=======
-        if(count($listTasks[$i])>6){
-            echo "<td>".displayTime(abs(strtotime($listTasks[$i]['startDate'])-strtotime($listTasks[$i]['endDate'])))."</td>";
-        }else{
-            echo "<td> 0 seconds </td>";
->>>>>>> 61b689290dffe059394936b2b3c9f4a4d2b8cbd4
         }
 		echo "</tr>";
 	}
@@ -218,7 +211,6 @@ function findProjectByTitle($projectList, $title){
     return null;
 }
 
-<<<<<<< HEAD
 function findTaskById($taskList, $id){
     for($i=0; $i<count($taskList); $i++){
         if($taskList[$i]['_id'] == $id){
@@ -228,8 +220,6 @@ function findTaskById($taskList, $id){
     return null;
 }
 
-=======
->>>>>>> 61b689290dffe059394936b2b3c9f4a4d2b8cbd4
 function displayTime($time){
     $rest= $time;
     $days = round($rest/86400);
