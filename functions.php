@@ -102,7 +102,7 @@ function displayTasks($listTasks){
         if(count($listTasks[$i])>6){
             echo "<td>".displayTime(abs(strtotime($listTasks[$i]['startDate'])-strtotime($listTasks[$i]['endDate'])))."</td>";
         }else{
-            echo "<td> NULL </td>";
+            echo "<td> 0 seconds </td>";
         }
 		echo "</tr>";
 	}

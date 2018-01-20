@@ -67,6 +67,7 @@
                         <li><a href="tasks-list.php">lister</a></li>
                         <li><a href="tasks-create.php">créer</a></li>
                         <li><a href="tasks-delete.php">supprimer</a></li>
+                        <li><a href="tasks-work.php">travailler</a></li>
                       </ul>
                     </li>
                     <li class="dropdown">
