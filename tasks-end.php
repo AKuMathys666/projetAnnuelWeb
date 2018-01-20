@@ -6,8 +6,35 @@
 <?php
 
     $currentTime = date(DATE_ISO8601, time());
+/*********************/    
+  
+    echo "startDate: ";
+    echo strtotime(findTaskById($_SESSION['taskList'], $_POST['task'])['startDate']);
+    
+    echo "</br>";
+    echo "endDate: ";
+    echo strtotime($currentTime);
+    
+    echo "</br>";
+    echo "diff: ";
+    echo abs(strtotime(findTaskById($_SESSION['taskList'], $_POST['task'])['startDate'])-strtotime($currentTime));
+    
+    echo "</br>";
+    echo "oldTimes: ";
+    echo findTaskById($_SESSION['taskList'], $_POST['task'])['times'];
+    
+    echo "</br>";
+    
+    
+/***********************/    
+    $times = abs(strtotime(findTaskById($_SESSION['taskList'], $_POST['task'])['startDate'])-strtotime($currentTime)) + strtotime(findTaskById($_SESSION['taskList'], $_POST['task'])['times']);
+    echo "newTimes: ";
+    echo $times;
+    
+    echo "</br>date format: ";
+    echo displayTime($times);
 
-    $data = array("endDate" => $currentTime);                                                                    
+    $data = array("endDate" => $currentTime, "times" => $times);                                                                    
     $data_string = json_encode($data);
         
     //print($_SESSION['userToken']);

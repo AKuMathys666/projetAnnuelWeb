@@ -99,8 +99,13 @@ function displayTasks($listTasks){
         echo "<td>".$listTasks[$i]['project']."</td>";
         echo "<td>".$listTasks[$i]['__v']."</td>";
         //echo "<td>".$listTasks[$i]['tasks']."</td>";
-        if(count($listTasks[$i])>6){
+        /*if(count($listTasks[$i])>6){
             echo "<td>".displayTime(abs(strtotime($listTasks[$i]['startDate'])-strtotime($listTasks[$i]['endDate'])))."</td>";
+        }else{
+            echo "<td> 0 seconds </td>";
+        }*/
+        if(count($listTasks[$i])>7 && $listTasks[$i]['endDate'] != null){    
+            echo "<td>".displayTime($listTasks[$i]['times'])."</td>";
         }else{
             echo "<td> 0 seconds </td>";
         }
@@ -201,6 +206,15 @@ function findProjectByTitle($projectList, $title){
             print(count($projectList));
             print($projectList[$i]['_id']);
             return $projectList[$i]['_id'];
+        }
+    }
+    return null;
+}
+
+function findTaskById($taskList, $id){
+    for($i=0; $i<count($taskList); $i++){
+        if($taskList[$i]['_id'] == $id){
+            return $taskList[$i];
         }
     }
     return null;
