@@ -62,3 +62,8 @@ body{
 {
 	text-align: center;
 }
+
+.login-css
+{
+    max-width: 50%;
+}

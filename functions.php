@@ -90,7 +90,7 @@ function displayTasks($listTasks){
         echo "<td>".$listTasks[$i]['_id']."</td>";    
         echo "<td>".$listTasks[$i]['title']."</td>";
         echo "<td>".$listTasks[$i]['startDate']."</td>";
-        if(count($listTasks[$i])>6){
+        if($listTasks[$i]['endDate']!= null){
             echo "<td>".$listTasks[$i]['endDate']."</td>";
         }else{
             echo "<td> NULL </td>";

@@ -28,7 +28,7 @@
     
     
 /***********************/    
-    $times = abs(strtotime(findTaskById($_SESSION['taskList'], $_POST['task'])['startDate'])-strtotime($currentTime)) + strtotime(findTaskById($_SESSION['taskList'], $_POST['task'])['times']);
+    $times = abs(strtotime(findTaskById($_SESSION['taskList'], $_POST['task'])['startDate'])-strtotime($currentTime)) + findTaskById($_SESSION['taskList'], $_POST['task'])['times'];
     echo "newTimes: ";
     echo $times;
     

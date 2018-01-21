@@ -49,7 +49,7 @@
         //print_r($result);
         //print($result["tasks"][count($result["tasks"])-1]);
 
-        //$_SESSION['userToken'] = $result;
+        $_SESSION['taskList'] = getListTasks($header, $data_string);
         echo "Working !";
 
         echo "</br>";
