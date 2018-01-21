@@ -22,7 +22,8 @@
     
     $currentTime = date(DATE_ISO8601, time());
 
-    $data = array("title" => $_POST['title'], "startDate" => $currentTime);                                                                    
+
+    $data = array("title" => $_POST['title'], "startDate" => $currentTime, "times" => '0');                                                                    
     $data_string = json_encode($data);
         
     //print($_SESSION['userToken']);
@@ -51,6 +52,9 @@
     //print($result["tasks"][count($result["tasks"])-1]);
         
     //$_SESSION['userToken'] = $result;
+
+    $_SESSION['taskList'] = getListTasks($header, $data_string);
+
     echo "Task created !";
     
     echo "</br>";
