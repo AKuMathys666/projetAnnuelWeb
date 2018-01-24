@@ -82,26 +82,26 @@
                     <li class="dropdown">
                       <a href="projects.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projects <span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        <li><a href="projects-list.php">lister</a></li>
-                        <li><a href="projects-create.php">créer</a></li>
-                        <li><a href="project-delete.php">supprimer</a></li>
+                        <li><a href="projects-list.php">list</a></li>
+                        <li><a href="projects-create.php">create</a></li>
+                        <li><a href="project-delete.php">delete</a></li>
                       </ul>
                     </li>
                     <li class="dropdown">
                       <a href="tasks.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tasks <span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        <li><a href="tasks-list.php">lister</a></li>
-                        <li><a href="tasks-create.php">créer</a></li>
-                        <li><a href="tasks-delete.php">supprimer</a></li>
-                        <li><a href="tasks-work.php">travailler</a></li>
+                        <li><a href="tasks-list.php">list</a></li>
+                        <li><a href="tasks-create.php">create</a></li>
+                        <li><a href="tasks-delete.php">delete</a></li>
+                        <li><a href="tasks-work.php">work</a></li>
                       </ul>
                     </li>
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users <span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        <li><a href="users-list.php">lister</a></li>
+                        <li><a href="users-list.php">list</a></li>
                         <li><a href="signup.php">sign up</a></li>
-                        <li><a href="user-delete.php">supprimer</a></li>
+                        <li><a href="user-delete.php">delete</a></li>
                       </ul>
                     </li>
                   </ul>
