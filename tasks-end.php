@@ -3,6 +3,9 @@
     require_once "functions.php";
 ?>
 <section>
+    <div class="panel panel-default panelList-css">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Task Lists</div>
 <?php
 
     $currentTime = date(DATE_ISO8601, time());
@@ -63,7 +66,7 @@
     $_SESSION['taskList'] = getListTasks($header, $data_string);
 
 ?>
-    
+    </div>
 </section>
 
 <?php

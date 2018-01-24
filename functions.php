@@ -60,21 +60,25 @@ function createProject($header, $data_string)
     return $result;
 }
 
-function displayProjects($listProjects){
+function displayProjects($listProjects, $listUser, $listTask){
 	$nb=count($listProjects);
 	for($i=0;$i<$nb;$i++)
 	{
 		echo "<tr>";
         echo "<td>".$listProjects[$i]['_id']."</td>";    
         echo "<td>".$listProjects[$i]['title']."</td>";
-        echo "<td>".$listProjects[$i]['creator']."</td>";
+        echo "<td>".findUserById($listUser, $listProjects[$i]['creator'])['email']."</td>";
+        //echo "<td>".$listProjects[$i]['creator']."</td>";
         echo "<td>".$listProjects[$i]['equipe']."</td>";
         echo "<td>".$listProjects[$i]['__v']."</td>";
         //echo "<td>".$listProjects[$i]['tasks']."</td>";
         echo "<td>";
         for($j=0; $j<count($listProjects[$i]['tasks']); $j++){
-            print($listProjects[$i]['tasks'][$j]);
-            echo "</br>";
+            //print($listProjects[$i]['tasks'][$j]);
+            if(findTaskById($listTask, $listProjects[$i]['tasks'][$j])!=null){
+                echo findTaskById($listTask, $listProjects[$i]['tasks'][$j])['title'];
+                echo "</br>";
+            }
         }
         //print_r($listProjects[$i]['tasks']);
         echo "</td>";
@@ -82,7 +86,7 @@ function displayProjects($listProjects){
 	}
 }
 
-function displayTasks($listTasks){
+function displayTasks($listTasks, $listUser, $listProject){
 	$nb=count($listTasks);
 	for($i=0;$i<$nb;$i++)
 	{
@@ -95,8 +99,10 @@ function displayTasks($listTasks){
         }else{
             echo "<td> NULL </td>";
         }
-        echo "<td>".$listTasks[$i]['owner']."</td>";
-        echo "<td>".$listTasks[$i]['project']."</td>";
+        //echo "<td>".$listTasks[$i]['owner']."</td>";
+        echo "<td>".findUserById($listUser, $listTasks[$i]['owner'])['email']."</td>";
+        echo "<td>".findProjectById($listProject, $listTasks[$i]['project'])['title']."</td>";
+        //echo "<td>".$listTasks[$i]['project']."</td>";
         echo "<td>".$listTasks[$i]['__v']."</td>";
         //echo "<td>".$listTasks[$i]['tasks']."</td>";
         /*if(count($listTasks[$i])>6){
@@ -113,7 +119,7 @@ function displayTasks($listTasks){
 	}
 }
 
-function displayUsers($listUsers){
+function displayUsers($listUsers, $listTask){
 	$nb=count($listUsers);
 	for($i=0;$i<$nb;$i++)
 	{
@@ -124,8 +130,12 @@ function displayUsers($listUsers){
         if(count($listUsers[$i])>6){
             echo "<td>";
             for($j=0; $j<count($listUsers[$i]['tasks']); $j++){
-                print($listUsers[$i]['tasks'][$j]);
-                echo "</br>";
+                if(findTaskById($listTask, $listUsers[$i]['tasks'][$j])!=null){
+                    echo findTaskById($listTask, $listUsers[$i]['tasks'][$j])['title'];
+                    echo "</br>";
+                }
+                //print($listUsers[$i]['tasks'][$j]);
+                //echo "</br>";
             }
             echo "</td>";
         }else{
@@ -159,15 +169,15 @@ function signUp($header, $data_string){
 
 function printAUser($user){
     
-    echo "<table class=".'"table-bordered table-responsive table-hover table-striped"'.">";
+    echo "<table class=".'"table-css table-bordered table-responsive table-hover table-striped"'.">";
     echo "<tr>
-    <th>Id</th>
-    <th>Email</th>
-    <th>Role</th>
-    <th>Tasks</th>
-    <th>Last name</th>
-    <th>First name</th>
-    <th>__v</th>
+    <th class='title-css'>Id</th>
+    <th class='title-css'>Email</th>
+    <th class='title-css'>Role</th>
+    <th class='title-css'>Tasks</th>
+    <th class='title-css'>Last name</th>
+    <th class='title-css'>First name</th>
+    <th class='title-css'>__v</th>
     </tr>";
     
     echo "<tr>";
@@ -215,6 +225,24 @@ function findTaskById($taskList, $id){
     for($i=0; $i<count($taskList); $i++){
         if($taskList[$i]['_id'] == $id){
             return $taskList[$i];
+        }
+    }
+    return null;
+}
+
+function findUserById($userList, $id){
+    for($i=0; $i<count($userList); $i++){
+        if($userList[$i]['_id'] == $id){
+            return $userList[$i];
+        }
+    }
+    return null;
+}
+
+function findProjectById($projectList, $id){
+    for($i=0; $i<count($projectList); $i++){
+        if($projectList[$i]['_id'] == $id){
+            return $projectList[$i];
         }
     }
     return null;

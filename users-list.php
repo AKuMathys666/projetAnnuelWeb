@@ -3,7 +3,9 @@
     require_once "functions.php";
 ?>
     <section>
-
+        <div class="panel panel-default panelList-css">
+            <!-- Default panel contents -->
+            <div class="panel-heading">User Lists</div>
 <?php
         
     //print($_SESSION['userToken']);
@@ -30,11 +32,11 @@
     <th class='title-css'>__v</th>
     </tr>";
         
-    displayUsers($_SESSION['userList']);
+    displayUsers($_SESSION['userList'], $_SESSION['taskList']);
         
 
 ?>
-        
+        </div>
     </section>
 
 <?php

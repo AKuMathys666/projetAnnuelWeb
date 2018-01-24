@@ -5,7 +5,7 @@
 
 <head>
 <script type="text/javascript">
-    var c=0
+    var c=1
     var t
     //window.onload=
     function timedCount()
@@ -14,9 +14,10 @@
         c=c+1
         t=setTimeout("timedCount()",1000)
     }
+    window.onload = timedCount;
 </script>
 </head>
-<body>
+<body onload="timedCount()">
     <?php
 
         $currentTime = date(DATE_ISO8601, time());
@@ -50,11 +51,11 @@
         //print($result["tasks"][count($result["tasks"])-1]);
 
         $_SESSION['taskList'] = getListTasks($header, $data_string);
-        echo "Working !";
+        //echo "Working !";
 
-        echo "</br>";
+        //echo "</br>";
 
-        echo "Counting...";
+        //echo "Counting...";
     ?>
 
             <!--
@@ -62,10 +63,15 @@
         <input type="text" id="txt">
     </form>-->
 
-    <form>
-    <input type="button" value="begin！" onClick="timedCount()">
-    <input type="text" id="txt">
-    </form>
+    <!--<form>-->
+    <!--<input type="button" value="begin！" onLoad="timedCount()">
+    <input type="text" id="txt">-->
+    
+    <!--</form>-->
+    <div class="input-group reduce-css">
+        <span class="input-group-addon" id="basic-addon1">Counting(Seconds)...</span>
+        <input type="text" id="txt" class="form-control" placeholder="count time" aria-describedby="basic-addon1">
+    </div>
 
 
     <?php
@@ -74,7 +80,7 @@
 
         //print($_SESSION['userToken']);
 
-        echo '<form action="tasks-end.php" method="POST">' ;
+        echo '<form class="reduce-css" action="tasks-end.php" method="POST">' ;
         echo '<input name="task" type="hidden" value ="'.$_POST['task'].'">';
         echo '<button type="submit" class="btn btn-default">Stop</button>';
         echo '</form>';

@@ -3,7 +3,9 @@
     require_once "functions.php";
 ?>
     <section>
-
+        <div class="panel panel-default panelList-css">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Result</div>
 <?php
 
     $data = array("email" => $_POST['email'], "password" => $_POST['password']);                
@@ -32,14 +34,14 @@
     $_SESSION['taskList'] = getListTasks($header, $data_string);
     $_SESSION['userList'] = getListUsers($header, $data_string);
         
-    echo "</br>Logged in!";
+    echo "<b>Logged in!";
         
     //print(getListProjects($header, $data_string));
     
     //print_r($_SESSION);
 
 ?>
-        
+        </div>
     </section>
 
 <?php

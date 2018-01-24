@@ -4,7 +4,7 @@
 ?>
     <section>
         
-        <form action="users-delete-result.php" method="POST">
+        <form class="reduce-css" action="users-delete-result.php" method="POST">
             
             <div class="form-group">
                 <label for="task">User</label>

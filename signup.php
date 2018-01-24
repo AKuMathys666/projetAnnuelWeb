@@ -3,7 +3,7 @@
 ?>
     <section>
         
-        <form action="signup-result.php" method="POST">
+        <form class="reduce-css" action="signup-result.php" method="POST">
             
             <div class="form-group">
                 <label for="email">Email address</label>

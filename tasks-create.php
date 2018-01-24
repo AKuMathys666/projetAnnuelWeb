@@ -4,7 +4,7 @@
 ?>
     <section>
         
-        <form action="tasks-create-result.php" method="POST">
+        <form class="reduce-css" action="tasks-create-result.php" method="POST">
             
             <div class="form-group">
                 <label for="title">Title</label>

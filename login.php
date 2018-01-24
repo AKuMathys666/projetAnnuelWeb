@@ -3,16 +3,16 @@
 ?>
     <section>
         
-        <form action="login-result.php" method="POST">
+        <form class="reduce-css" action="login-result.php" method="POST">
             
-            <div class="form-group login-css">
-                <label for="email">Email address</label>
-                <input name="email" type="email" class="form-control login-css" placeholder="Email">
+            <div class="form-group">
+                <label for="email">Email address :</label>
+                <input name="email" type="email" class="form-control" placeholder="Email">
             </div>
             
-            <div class="form-group login-css">
-                <label for="password">Password</label>
-                <input name="password" type="password" class="form-control login-css" placeholder="Password">
+            <div class="form-group">
+                <label for="password">Password :</label>
+                <input name="password" type="password" class="form-control" placeholder="Password">
             </div>
             
             <button type="submit" class="btn btn-default">Submit</button>

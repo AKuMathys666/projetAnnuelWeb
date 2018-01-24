@@ -13,9 +13,10 @@
         c=c+1
         t=setTimeout("timedCount()",1000)
     }
+    window.onload = timedCount;
 </script>
 </head>
-<body>
+<body onload="timedCount()">
     <section>
 
 <?php
@@ -55,21 +56,25 @@
 
     $_SESSION['taskList'] = getListTasks($header, $data_string);
 
-    echo "Task created !";
+    //echo "Task created !";
     
-    echo "</br>";
+    //echo "</br>";
         
-    echo "Counting...";
+    //echo "Counting...";
 ?>
         <!--
 <form>
     <input type="text" id="txt">
 </form>-->
 
-<form>
+<!--<form>
 <input type="button" value="begin！" onClick="timedCount()">
 <input type="text" id="txt">
-</form>
+</form>-->
+    <div class="input-group reduce-css">
+        <span class="input-group-addon" id="basic-addon1">Task created ! Counting(Seconds)...</span>
+        <input type="text" id="txt" class="form-control" placeholder="count time" aria-describedby="basic-addon1">
+    </div>
 
 <?php
         
@@ -79,7 +84,7 @@
 
 
         
-        echo '<form action="tasks-end.php" method="POST">' ;
+        echo '<form class="reduce-css" action="tasks-end.php" method="POST">' ;
         echo '<input name="task" type="hidden" value ="'.$result["tasks"][count($result["tasks"])-1].'">';
         echo '<button type="submit" class="btn btn-default">Stop</button>';
         echo '</form>';

@@ -4,7 +4,7 @@
 ?>
     <section>
         
-        <form action="tasks-working.php" method="POST">
+        <form class="reduce-css" action="tasks-working.php" method="POST">
             
             <div class="form-group">
                 <label for="task">Task</label>

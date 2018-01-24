@@ -4,7 +4,7 @@
 ?>
     <section>
         
-        <form action="projects-delete-result.php" method="POST">
+        <form class="reduce-css" action="projects-delete-result.php" method="POST">
             
             <div class="form-group">
                 <label for="project">Project</label>

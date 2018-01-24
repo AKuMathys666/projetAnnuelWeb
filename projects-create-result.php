@@ -3,7 +3,9 @@
     require_once "functions.php";
 ?>
     <section>
-
+        <div class="panel panel-default panelList-css">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Result</div>
 <?php
 
     $data = array("title" => $_POST['title']);                                                                    
@@ -19,7 +21,7 @@
     echo "Created !!!"
 
 ?>
-        
+        </div>
     </section>
 
 <?php

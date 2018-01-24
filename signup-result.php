@@ -3,7 +3,9 @@
     require_once "functions.php";
 ?>
     <section>
-
+        <div class="panel panel-default panelList-css">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Signed up!</div>
 <?php
 
     $data = array("email" => $_POST['email'], "password" => $_POST['password']);                
@@ -26,7 +28,7 @@
     //print_r($_SESSION);
 
 ?>
-        
+        </div>
     </section>
 
 <?php
