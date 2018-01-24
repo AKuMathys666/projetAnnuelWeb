@@ -51,6 +51,32 @@
                   <ul class="nav navbar-nav">
                     
                     <li><a href="login.php">login <span class="sr-only">(current)</span></a></li>
+          <!--            
+                      <li><a href="#" data-toggle="modal" data-target=".bs-example-modal-lg">login <span class="sr-only">(current)</span></a></li>
+            -->          
+                      <!-- Large modal -->
+<!--
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <form>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">Recipient:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+-->
                       <!--
                     <li><a href="tasks.php">Tasks</a></li>-->
                     <li class="dropdown">

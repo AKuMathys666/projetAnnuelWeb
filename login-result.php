@@ -12,8 +12,8 @@
         
     $data_string = json_encode($data);
         
-    $header = array('Content-Type: application/json', 'Content-Length: '.strlen($data_string), 'Authorization: '.$_SESSION['userToken']);
-        
+    $header = array('Content-Type: application/json', 'Content-Length: '.strlen($data_string));
+    
     //print($data_string);
 
     $ch = curl_init('http://localhost:8080/auth/login');                                                                      
