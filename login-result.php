@@ -3,7 +3,7 @@
     require_once "functions.php";
 ?>
     <section>
-        <div class="panel panel-default panelList-css">
+        <div class="panel panel-default login-result-css">
             <!-- Default panel contents -->
             <div class="panel-heading">Result</div>
 <?php
@@ -34,7 +34,7 @@
     $_SESSION['taskList'] = getListTasks($header, $data_string);
     $_SESSION['userList'] = getListUsers($header, $data_string);
         
-    echo "<b>Logged in!";
+    echo "<div class='oneline-css'><b>Logged in!</div>";
         
     //print(getListProjects($header, $data_string));
     

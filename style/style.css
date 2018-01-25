@@ -89,3 +89,14 @@ body{
     margin-left: 5%;
     margin-right: 5%;
 }
+
+.login-result-css{
+    max-width: 30%;
+    text-align: center;
+    margin-left: 30%;
+}
+
+.oneline-css{
+    min-height: 100px;
+    margin-top: 20%;
+}

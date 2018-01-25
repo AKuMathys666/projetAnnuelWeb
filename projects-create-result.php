@@ -17,6 +17,8 @@
     
 
     $result = createProject($header, $data_string);
+            
+    $_SESSION["projectList"] = getListProjects($header, $data_string);
     //print_r($result);
     echo "Created !!!"
 

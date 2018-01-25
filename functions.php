@@ -65,12 +65,12 @@ function displayProjects($listProjects, $listUser, $listTask){
 	for($i=0;$i<$nb;$i++)
 	{
 		echo "<tr>";
-        echo "<td>".$listProjects[$i]['_id']."</td>";    
+        //echo "<td>".$listProjects[$i]['_id']."</td>";    
         echo "<td>".$listProjects[$i]['title']."</td>";
         echo "<td>".findUserById($listUser, $listProjects[$i]['creator'])['email']."</td>";
         //echo "<td>".$listProjects[$i]['creator']."</td>";
         echo "<td>".$listProjects[$i]['equipe']."</td>";
-        echo "<td>".$listProjects[$i]['__v']."</td>";
+        //echo "<td>".$listProjects[$i]['__v']."</td>";
         //echo "<td>".$listProjects[$i]['tasks']."</td>";
         echo "<td>";
         for($j=0; $j<count($listProjects[$i]['tasks']); $j++){
@@ -91,7 +91,7 @@ function displayTasks($listTasks, $listUser, $listProject){
 	for($i=0;$i<$nb;$i++)
 	{
 		echo "<tr>";
-        echo "<td>".$listTasks[$i]['_id']."</td>";    
+        //echo "<td>".$listTasks[$i]['_id']."</td>";    
         echo "<td>".$listTasks[$i]['title']."</td>";
         echo "<td>".$listTasks[$i]['startDate']."</td>";
         if($listTasks[$i]['endDate']!= null){
@@ -103,7 +103,7 @@ function displayTasks($listTasks, $listUser, $listProject){
         echo "<td>".findUserById($listUser, $listTasks[$i]['owner'])['email']."</td>";
         echo "<td>".findProjectById($listProject, $listTasks[$i]['project'])['title']."</td>";
         //echo "<td>".$listTasks[$i]['project']."</td>";
-        echo "<td>".$listTasks[$i]['__v']."</td>";
+        //echo "<td>".$listTasks[$i]['__v']."</td>";
         //echo "<td>".$listTasks[$i]['tasks']."</td>";
         /*if(count($listTasks[$i])>6){
             echo "<td>".displayTime(abs(strtotime($listTasks[$i]['startDate'])-strtotime($listTasks[$i]['endDate'])))."</td>";
@@ -124,7 +124,7 @@ function displayUsers($listUsers, $listTask){
 	for($i=0;$i<$nb;$i++)
 	{
 		echo "<tr>";
-        echo "<td>".$listUsers[$i]['_id']."</td>";    
+        //echo "<td>".$listUsers[$i]['_id']."</td>";    
         echo "<td>".$listUsers[$i]['email']."</td>";
         echo "<td>".$listUsers[$i]['role']."</td>";
         if(count($listUsers[$i])>6){
@@ -143,7 +143,7 @@ function displayUsers($listUsers, $listTask){
         }
         echo "<td>".$listUsers[$i]['last_name']."</td>";
         echo "<td>".$listUsers[$i]['first_name']."</td>";
-        echo "<td>".$listUsers[$i]['__v']."</td>";
+        //echo "<td>".$listUsers[$i]['__v']."</td>";
         //echo "<td>".$listUsers[$i]['tasks']."</td>";
 		echo "</tr>";
 	}

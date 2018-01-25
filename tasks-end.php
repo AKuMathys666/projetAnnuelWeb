@@ -21,19 +21,19 @@
     
     echo "</br>";
     echo "diff: ";
-    echo abs(strtotime(findTaskById($_SESSION['taskList'], $_POST['task'])['startDate'])-strtotime($currentTime));
+    echo $diff = abs(strtotime(findTaskById($_SESSION['taskList'], $_POST['task'])['startDate'])-strtotime($currentTime));
     
     echo "</br>";
     echo "oldTimes: ";
-    echo findTaskById($_SESSION['taskList'], $_POST['task'])['times'];
+    echo $oldTimes = findTaskById($_SESSION['taskList'], $_POST['task'])['times'];
     
     echo "</br>";
     
     
 /***********************/    
-    $times = abs(strtotime(findTaskById($_SESSION['taskList'], $_POST['task'])['startDate'])-strtotime($currentTime)) + findTaskById($_SESSION['taskList'], $_POST['task'])['times'];
+    //$times = abs(strtotime(findTaskById($_SESSION['taskList'], $_POST['task'])['startDate'])-strtotime($currentTime) + findTaskById($_SESSION['taskList'], $_POST['task'])['times']);
     echo "newTimes: ";
-    echo $times;
+    echo $times = $diff + $oldTimes;
     
     echo "</br>date format: ";
     echo displayTime($times);
