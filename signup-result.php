@@ -8,7 +8,17 @@
             <div class="panel-heading">Signed up!</div>
 <?php
 
-    $data = array("email" => $_POST['email'], "password" => $_POST['password']);                
+    if($_POST['firstname'] != null && $_POST['lastname'] != null){
+        $data = array("email" => $_POST['email'], "password" => $_POST['password'], "first_name" => $_POST['firstname'], "last_name" => $_POST['lastname']);
+    }else if($_POST['firstname'] != null){
+        $data = array("email" => $_POST['email'], "password" => $_POST['password'], "first_name" => $_POST['firstname']);
+    }else if($_POST['lastname'] != null){
+        $data = array("email" => $_POST['email'], "password" => $_POST['password'], "last_name" => $_POST['lastname']);
+
+    }else{
+        $data = array("email" => $_POST['email'], "password" => $_POST['password']);
+
+    }
         
     $data_string = json_encode($data);
         
