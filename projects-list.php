@@ -19,6 +19,7 @@
         
     $result = getListProjects($header, $data_string);
     $_SESSION['projectList'] = $result;
+    $_SESSION['taskList'] = getListTasks($header, $data_string);
         
     //print_r($result);
     /*    
@@ -28,12 +29,12 @@
         <!--<th class='title-css'>Id</th>-->
         <th class='title-css'>Title</th>
         <th class='title-css'>Creator</th>
-        <th class='title-css'>Equipe</th>
+        <th class='title-css'>Member</th>
         <!--<th class='title-css'>__v</th>-->
         <th class='title-css'>tasks</th>
         </tr>";
         //print_r($_SESSION['userList']);
-        displayProjects($_SESSION['projectList'], $_SESSION['userList'], $_SESSION['taskList']);
+        displayProjects($_SESSION['projectList'], $_SESSION['userList'], $_SESSION['taskList'], $header, $data_string);
 
 
 ?>

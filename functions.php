@@ -45,6 +45,37 @@ function getListUsers($header, $data_string)
     return $result;
 }
 
+function getTeam($header, $data_string, $id)
+{
+    $ch = curl_init('http://localhost:8080/teams/' . $id);                                                                      
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                                     
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $header);                
+
+    $response = curl_exec($ch);
+    
+    $result = json_decode($response, true);
+    
+    return $result;
+}
+
+function displayMembers($members, $users, $team)
+{
+    for($i=0; $i<count($members); $i++){
+        echo "<tr>";
+        echo "<td>".findUserById($users, $members[$i])['email']."</td>";
+        echo "<td>".findUserById($users, $members[$i])['last_name']."</td>";
+        echo "<td>".findUserById($users, $members[$i])['first_name']."</td>";
+        echo "<td><a href='delete-member.php?id=".$team."&idUser=".$members[$i]."'>
+						<button type='submit' class='btn btn-danger' name='idUser'>Delete</button>
+					</a></td>";
+        echo "</tr>";
+    }
+    
+}
+
+
 function createProject($header, $data_string)
 {
     $ch = curl_init('http://localhost:8080/projects');                                                                      
@@ -60,7 +91,7 @@ function createProject($header, $data_string)
     return $result;
 }
 
-function displayProjects($listProjects, $listUser, $listTask){
+function displayProjects($listProjects, $listUser, $listTask, $header, $data_string){
 	$nb=count($listProjects);
 	for($i=0;$i<$nb;$i++)
 	{
@@ -69,7 +100,21 @@ function displayProjects($listProjects, $listUser, $listTask){
         echo "<td>".$listProjects[$i]['title']."</td>";
         echo "<td>".findUserById($listUser, $listProjects[$i]['creator'])['email']."</td>";
         //echo "<td>".$listProjects[$i]['creator']."</td>";
-        echo "<td>".$listProjects[$i]['equipe']."</td>";
+        //echo "<td>".getTeam($header, $data_string, $listProjects[$i]['equipe'])['members']."</td>";
+        
+        $members = getTeam($header, $data_string, $listProjects[$i]['equipe'])['members'];
+        echo "<td>";
+        echo "<a href='members.php?team=".getTeam($header, $data_string, $listProjects[$i]['equipe'])['_id']."'>";
+        
+        
+        for($n=0; $n<count($members); $n++){
+            echo findUserById($listUser, $members[$n])['email'];
+            echo "</br>";
+        }
+        
+        
+        echo "</a>";
+        echo "</td>";
         //echo "<td>".$listProjects[$i]['__v']."</td>";
         //echo "<td>".$listProjects[$i]['tasks']."</td>";
         echo "<td>";
@@ -78,6 +123,9 @@ function displayProjects($listProjects, $listUser, $listTask){
             if(findTaskById($listTask, $listProjects[$i]['tasks'][$j])!=null){
                 echo findTaskById($listTask, $listProjects[$i]['tasks'][$j])['title'];
                 echo "</br>";
+            }
+            else{
+                echo null;
             }
         }
         //print_r($listProjects[$i]['tasks']);
@@ -152,6 +200,24 @@ function displayUsers($listUsers, $listTask){
 function signUp($header, $data_string){
         
     $ch = curl_init('http://localhost:8080/users');                                                                      
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(                                                                          
+        'Content-Type: application/json',                                                                                
+        'Content-Length: ' . strlen($data_string))                                                                       
+    );                                                                                                                   
+
+    $response = curl_exec($ch);
+    
+    $result = json_decode($response, true);
+    
+    return $result;
+}
+
+function addMember($header, $data_string, $user, $team){
+        
+    $ch = curl_init('http://localhost:8080/teams/'.$team.'/'.$user);                                                                      
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
@@ -247,6 +313,7 @@ function findProjectById($projectList, $id){
     }
     return null;
 }
+
 
 function displayTime($time){
     $rest= $time;

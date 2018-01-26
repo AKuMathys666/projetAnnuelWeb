@@ -34,11 +34,16 @@
     $_SESSION['taskList'] = getListTasks($header, $data_string);
     $_SESSION['userList'] = getListUsers($header, $data_string);
         
-    echo "<div class='oneline-css'><b>Logged in!</div>";
+    if($result == 'user.not.found'){
+        echo "utilisateur n'existe pas!";
+    }else{
+        echo "<div class='oneline-css'><b>Logged in!</div>";
+    }
         
     //print(getListProjects($header, $data_string));
     
     //print_r($_SESSION);
+    //echo $result;
 
 ?>
         </div>

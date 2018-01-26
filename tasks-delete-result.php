@@ -33,7 +33,7 @@
         
     //$_SESSION['userToken'] = $result;
         
-    echo "<h1 style='text-align:center'>Tâche supprimé!</br></h1>";
+    echo "<h1 style='text-align:center'>Task deleted!</br></h1>";
     
     //print($_SESSION['userToken']);
 
